@@ -13,7 +13,7 @@ const TabComponent = ({ onAddUser }) => {
 
   return (
     <div className="tab-components radius-5">
-      <div className="tab-buttons ">
+      <div className="tab-buttons flex ">
         <button
           className={`cursor-pointer btn ${
             activeTab === "admin" ? "btn-active" : ""
@@ -32,9 +32,12 @@ const TabComponent = ({ onAddUser }) => {
         </button>
       </div>
       <div className="tab-content">
-        <button onClick={onAddUser} className="add-user-button">
-          Add User
-        </button>
+        <div className="flex justify-end mb-2">
+          <button onClick={onAddUser} className="add-user-button">
+            Add User
+          </button>
+        </div>
+
         {activeTab === "admin" ? (
           <Admin adminuserData={adminUser} setadminUser={setadminUser} />
         ) : (

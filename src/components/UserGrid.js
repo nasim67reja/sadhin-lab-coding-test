@@ -10,10 +10,11 @@ const UserGrid = ({ users }) => {
         <div className="flex-1">Role</div>
         <div className="flex-1">Division</div>
         <div className="flex-1">District</div>
+        <div className="flex-1 text-center">View</div>
       </div>
       <ul>
-        {users.map((user, index) => (
-          <User key={index} data={user} />
+        {users.map((user) => (
+          <User key={user.id} data={user} />
         ))}
       </ul>
     </div>

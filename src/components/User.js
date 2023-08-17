@@ -1,4 +1,5 @@
 import React from "react";
+import { GrFormView } from "react-icons/gr";
 
 const User = ({ data }) => {
   return (
@@ -8,6 +9,9 @@ const User = ({ data }) => {
       <div className="flex-1">{data.user_type}</div>
       <div className="flex-1">{data.division}</div>
       <div className="flex-1">{data.district}</div>
+      <div className="flex-1 center  cursor-pointer">
+        <GrFormView size={20} />
+      </div>
     </li>
   );
 };
