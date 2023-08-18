@@ -9,6 +9,9 @@
 .w-fit {
   width: fit-content;
 }
+.h-524 {
+  height: 524px;
+}
 .h-screen {
   height: 100vh;
 }
@@ -68,6 +71,10 @@
 .cursor-pointer {
   cursor: pointer;
 }
+.not-allowed {
+  cursor: not-allowed !important;
+  opacity: 0.5;
+}
 .border-right {
   border-right: 1px solid gray !important;
 }
@@ -80,8 +87,17 @@
 .mt-2 {
   margin-top: 2rem;
 }
+.mr-1 {
+  margin-right: 1rem;
+}
 .p-2 {
   padding: 2rem;
+}
+.pb-2 {
+  padding-bottom: 2rem;
+}
+.pr-2 {
+  padding-right: 2rem;
 }
 .transformX-1 {
   transform: translateX(1rem);
@@ -116,6 +132,9 @@
 }
 .right-3 {
   right: 3%;
+}
+.bottom-4 {
+  bottom: 4%;
 }
 
 /* z-indexing */

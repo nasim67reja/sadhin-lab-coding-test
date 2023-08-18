@@ -1,27 +1,40 @@
 import React, { useState } from "react";
 import Admin from "./Admin";
 import Employee from "./Employee";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { overlayActions } from "../store/ovarlay";
 
 const TabComponent = () => {
   const dispatch = useDispatch();
-
-  const [adminUser, setadminUser] = useState(null);
-  const [employee, setemployee] = useState(null);
-
+  const [page, setPage] = useState(1);
   const [activeTab, setActiveTab] = useState("admin");
+
+  const nextbtnIsDiable = useSelector(
+    (state) => state.ovarlay.nextBtnIsDisiable
+  );
+
+  console.log("nextbtnIsDiable", nextbtnIsDiable);
+  const previousBtnIsDisiable = useSelector(
+    (state) => state.ovarlay.previousBtnIsDisiable
+  );
+
+  // previous btn handle (working or not)
+  if (page > 1) dispatch(overlayActions.previousBtnHandler(false));
+  else dispatch(overlayActions.previousBtnHandler(true));
+
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+    setPage(1); // when change the tab always first page will be call
   };
 
+  // open modal
   const addUserHandler = () => {
     dispatch(overlayActions.backdropVisible());
     dispatch(overlayActions.signUpFormVisibleHandler());
   };
 
   return (
-    <div className="shadow-base radius-5">
+    <div className="shadow-base radius-5 h-524 relative">
       <div className="tab-buttons flex ">
         <button
           className={`cursor-pointer btn ${
@@ -49,10 +62,27 @@ const TabComponent = () => {
         </div>
 
         {activeTab === "admin" ? (
-          <Admin adminuserData={adminUser} setadminUser={setadminUser} />
+          <Admin page={page} />
         ) : (
-          <Employee employeeData={employee} setemployee={setemployee} />
+          <Employee page={page} />
         )}
+      </div>
+
+      <div className="pagination-btn-box absolute right-3 bottom-4 flex gap-2">
+        <button
+          disabled={previousBtnIsDisiable}
+          onClick={() => setPage((page) => page - 1)}
+          className={`${previousBtnIsDisiable ? "not-allowed" : ""}`}
+        >
+          ⬅ Previous
+        </button>
+        <button
+          disabled={nextbtnIsDiable}
+          onClick={() => setPage((page) => page + 1)}
+          className={`${nextbtnIsDiable ? "not-allowed" : ""}`}
+        >
+          Next ➡
+        </button>
       </div>
     </div>
   );

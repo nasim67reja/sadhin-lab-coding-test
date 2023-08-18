@@ -2,10 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import UserGrid from "./UserGrid";
 import Spinner from "./Spinner";
+import { LIMITS } from "./Urls";
+import { employeeActions } from "../store/employee";
+import { useDispatch, useSelector } from "react-redux";
 
-const Admin = ({ adminuserData, setadminUser }) => {
+const Admin = ({ page }) => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const admin = useSelector((state) => state.employee.admin);
+  const current = admin.slice((page - 1) * 5, page * 5);
+
   //  fetching data using axios (async...await)
   useEffect(() => {
     async function fetchData() {
@@ -16,12 +24,12 @@ const Admin = ({ adminuserData, setadminUser }) => {
           {
             params: {
               user_type: "admin",
-              page: 1,
-              limit: 5,
+              page,
+              limit: LIMITS,
             },
           }
         );
-        setadminUser(response.data);
+        dispatch(employeeActions.addAdmin(response.data));
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -29,13 +37,13 @@ const Admin = ({ adminuserData, setadminUser }) => {
         setIsError(true);
       }
     }
-    if (!adminuserData) fetchData();
-  }, [adminuserData, setadminUser]);
+    if (current.length < 1) fetchData();
+  }, []);
 
   if (isError) return <div className="center">Something went wrong</div>;
   if (isLoading) return <Spinner />;
 
-  return <>{adminuserData && <UserGrid users={adminuserData} />}</>;
+  return <>{current && <UserGrid users={current} />}</>;
 };
 
 export default Admin;

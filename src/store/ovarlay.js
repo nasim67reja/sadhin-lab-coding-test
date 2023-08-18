@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialOvarlayState = {
   backdropVisible: false,
   signUpFormIsVisible: false,
+  nextBtnIsDisiable: true,
+  previousBtnIsDisiable: true,
 };
 
 const ovarlaySlice = createSlice({
@@ -20,6 +22,12 @@ const ovarlaySlice = createSlice({
     },
     signUpFormHiddenHandler(state) {
       state.signUpFormIsVisible = false;
+    },
+    previousBtnHandler(state, action) {
+      state.previousBtnIsDisiable = action.payload;
+    },
+    nextsBtnHandler(state, action) {
+      state.nextBtnIsDisiable = action.payload;
     },
   },
 });

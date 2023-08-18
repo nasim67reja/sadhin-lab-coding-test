@@ -162,3 +162,10 @@ button {
 }
 
 /*  */
+.pagination-btn-box button {
+  border: none;
+  background: transparent;
+  color: #2581c7;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
