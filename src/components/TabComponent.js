@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import Admin from "./Admin";
 import Employee from "./Employee";
+import { useDispatch } from "react-redux";
+import { overlayActions } from "../store/ovarlay";
 
-const TabComponent = ({ onAddUser }) => {
+const TabComponent = () => {
+  const dispatch = useDispatch();
+
   const [adminUser, setadminUser] = useState(null);
   const [employee, setemployee] = useState(null);
 
   const [activeTab, setActiveTab] = useState("admin");
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+  };
+
+  const addUserHandler = () => {
+    dispatch(overlayActions.backdropVisible());
+    dispatch(overlayActions.signUpFormVisibleHandler());
   };
 
   return (
@@ -33,7 +42,7 @@ const TabComponent = ({ onAddUser }) => {
       </div>
       <div className="tab-content">
         <div className="flex justify-end mb-2">
-          <button onClick={onAddUser} className="add-user-button">
+          <button onClick={addUserHandler} className="add-user-button">
             Add User
           </button>
         </div>
