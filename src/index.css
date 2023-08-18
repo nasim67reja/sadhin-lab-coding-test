@@ -67,12 +67,6 @@ body {
   outline: none;
 }
 
-.tab-components {
-  /* padding: 20px; */
-  box-shadow: 2px -1px 15px 1px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 2px -1px 15px 1px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 2px -1px 15px 1px rgba(0, 0, 0, 0.2);
-}
 .tab-buttons {
   border-bottom: 1px solid gray;
 }

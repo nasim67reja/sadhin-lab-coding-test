@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import { overlayActions } from "../store/ovarlay";
+import { PostUrl } from "./Urls";
 
 const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -42,11 +43,44 @@ const SignupForm = () => {
   const distpatch = useDispatch();
   const signUpForm = useSelector((state) => state.ovarlay.signUpFormIsVisible);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const formSubmitHandler = (values) => {
-    console.log("values", values);
-    distpatch(overlayActions.backdropHidden());
-    distpatch(overlayActions.signUpFormHiddenHandler());
+    const data = { ...values, division: "dhaka", district: "dhaka" };
+
+    setLoading(true);
+    setError(null);
+
+    // post request using fetch api (then)
+    fetch(PostUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        console.log("Response data:", responseData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setError("An error occurred while submitting the request.");
+        setLoading(false);
+      });
+    if (!loading) {
+      distpatch(overlayActions.backdropHidden());
+      distpatch(overlayActions.signUpFormHiddenHandler());
+    }
   };
+
   return (
     <>
       {signUpForm && (
@@ -64,19 +98,19 @@ const SignupForm = () => {
           <h2 className="text-center heading-secondary">Add User</h2>
           <Formik
             initialValues={{
-              firstName: "",
-              lastName: "",
-              userType: "",
+              first_name: "",
+              last_name: "",
+              user_type: "",
             }}
             validationSchema={Yup.object({
-              firstName: Yup.string()
+              first_name: Yup.string()
                 .max(15, "Must be 15 characters or less")
                 .required("Required"),
-              lastName: Yup.string()
+              last_name: Yup.string()
                 .max(20, "Must be 20 characters or less")
                 .required("Required"),
 
-              userType: Yup.string()
+              user_type: Yup.string()
                 .oneOf(["admin", "employee"], "Invalid User Type")
                 .required("Required"),
             })}
@@ -85,26 +119,25 @@ const SignupForm = () => {
               // setTimeout(() => {
               //   alert(JSON.stringify(values, null, 2));
               // }, 400);
-              console.log("isSubmitting", isSubmitting);
               setSubmitting(false);
             }}
           >
             <Form className="form">
               <MyTextInput
                 label="First Name"
-                name="firstName"
+                name="first_name"
                 type="text"
                 placeholder="Nasim"
               />
 
               <MyTextInput
                 label="Last Name"
-                name="lastName"
+                name="last_name"
                 type="text"
                 placeholder="Reja"
               />
 
-              <MySelect label="User Type" name="userType">
+              <MySelect label="User Type" name="user_type">
                 <option value="">Select</option>
                 <option value="admin">Admin</option>
                 <option value="employee">Employee</option>

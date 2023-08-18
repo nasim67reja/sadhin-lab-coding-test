@@ -1,13 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import SignupForm from "./components/Form";
-import TabComponent from "./components/TabComponent";
 import Backdrop from "./components/Backdrop";
+import { Route, Routes } from "react-router-dom";
+import User from "./pages/User";
+import Home from "./pages/Home";
 
 function App() {
   return (
-    <div className="container">
-      <TabComponent />
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path=":userId" element={<User />} />
+      </Routes>
 
       {ReactDOM.createPortal(
         <Backdrop />,
@@ -17,7 +22,7 @@ function App() {
         <SignupForm />,
         document.getElementById("overlay-root")
       )}
-    </div>
+    </>
   );
 }
 

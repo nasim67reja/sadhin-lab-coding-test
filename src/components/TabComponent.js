@@ -21,7 +21,7 @@ const TabComponent = () => {
   };
 
   return (
-    <div className="tab-components radius-5">
+    <div className="shadow-base radius-5">
       <div className="tab-buttons flex ">
         <button
           className={`cursor-pointer btn ${
@@ -40,6 +40,7 @@ const TabComponent = () => {
           Employee User List
         </button>
       </div>
+
       <div className="tab-content">
         <div className="flex justify-end mb-2">
           <button onClick={addUserHandler} className="add-user-button">
