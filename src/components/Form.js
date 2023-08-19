@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import { overlayActions } from "../store/ovarlay";
-import { PostUrl } from "./Urls";
+import { BaseUrl, PostUrl } from "./Urls";
+import { employeeActions } from "../store/employee";
+import { formActions } from "../store/form";
 
 const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -40,47 +42,92 @@ const MySelect = ({ label, ...props }) => {
 
 // And now we can use these
 const SignupForm = () => {
-  const distpatch = useDispatch();
+  const dispatch = useDispatch();
   const signUpForm = useSelector((state) => state.ovarlay.signUpFormIsVisible);
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const formInfo = useSelector((state) => state.form);
 
   const formSubmitHandler = (values) => {
     const data = { ...values, division: "dhaka", district: "dhaka" };
 
-    setLoading(true);
-    setError(null);
+    if (formInfo.status === "adding") {
+      // post request using fetch api (then)
+      fetch(PostUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((responseData) => {
+          console.log("Response data:", responseData);
 
-    // post request using fetch api (then)
-    fetch(PostUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+          // push the data in existing user list
+          if (responseData.user_type === "admin")
+            dispatch(employeeActions.addAdminLast(responseData));
+          else dispatch(employeeActions.addEmployeeLast(responseData));
+
+          // modal hidden
+          dispatch(overlayActions.backdropHidden());
+          dispatch(overlayActions.signUpFormHiddenHandler());
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else if (formInfo.status === "Update") {
+      async function fetchData() {
+        try {
+          const response = await fetch(`${BaseUrl}/${formInfo.data.id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const responseData = await response.json();
+
+          // immediately update the ui without calling the api
+          dispatch(formActions.addHandler(responseData));
+
+          // the corresponding employee or admin from the employee store(in the tab) also need to update.
+
+          // modal hidden
+          dispatch(overlayActions.backdropHidden());
+          dispatch(overlayActions.signUpFormHiddenHandler());
+        } catch (error) {
+          console.error("Error:", error);
         }
-        return response.json();
-      })
-      .then((responseData) => {
-        console.log("Response data:", responseData);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setError("An error occurred while submitting the request.");
-        setLoading(false);
-      });
-    if (!loading) {
-      distpatch(overlayActions.backdropHidden());
-      distpatch(overlayActions.signUpFormHiddenHandler());
+      }
+      fetchData();
     }
   };
 
+  let initialValues;
+  if (formInfo.status === "adding")
+    // This is for Adding new user
+    initialValues = {
+      first_name: "",
+      last_name: "",
+      user_type: "",
+    };
+  else if (formInfo.status === "Update") {
+    // This is for Updating User
+    initialValues = {
+      first_name: formInfo.data.first_name,
+      last_name: formInfo.data.last_name,
+      user_type: formInfo.data.user_type,
+    };
+  }
   return (
     <>
       {signUpForm && (
@@ -89,19 +136,19 @@ const SignupForm = () => {
             className="absolute top-3 right-3"
             // close ovarlay handler
             onClick={() => {
-              distpatch(overlayActions.backdropHidden());
-              distpatch(overlayActions.signUpFormHiddenHandler());
+              dispatch(overlayActions.backdropHidden());
+              dispatch(overlayActions.signUpFormHiddenHandler());
             }}
           >
             <AiOutlineClose size={20} />
           </span>
-          <h2 className="text-center heading-secondary">Add User</h2>
+          <h2 className="text-center heading-secondary">
+            {formInfo && formInfo.status === "adding"
+              ? "Add User"
+              : "Update User"}
+          </h2>
           <Formik
-            initialValues={{
-              first_name: "",
-              last_name: "",
-              user_type: "",
-            }}
+            initialValues={initialValues}
             validationSchema={Yup.object({
               first_name: Yup.string()
                 .max(15, "Must be 15 characters or less")

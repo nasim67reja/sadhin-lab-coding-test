@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Admin from "./Admin";
 import Employee from "./Employee";
 import { useDispatch, useSelector } from "react-redux";
 import { overlayActions } from "../store/ovarlay";
+import { formActions } from "../store/form";
 
 const TabComponent = () => {
   const dispatch = useDispatch();
@@ -19,8 +20,11 @@ const TabComponent = () => {
   );
 
   // previous btn handle (working or not)
-  if (page > 1) dispatch(overlayActions.previousBtnHandler(false));
-  else dispatch(overlayActions.previousBtnHandler(true));
+  useEffect(() => {
+    // Move the logic that updates state based on 'page' to the effect
+    if (page > 1) dispatch(overlayActions.previousBtnHandler(false));
+    else dispatch(overlayActions.previousBtnHandler(true));
+  }, [dispatch, page]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -31,6 +35,7 @@ const TabComponent = () => {
   const addUserHandler = () => {
     dispatch(overlayActions.backdropVisible());
     dispatch(overlayActions.signUpFormVisibleHandler());
+    dispatch(formActions.statusHandler("adding"));
   };
 
   return (

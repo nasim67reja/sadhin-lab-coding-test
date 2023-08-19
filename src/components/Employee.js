@@ -14,6 +14,8 @@ const Employee = ({ page }) => {
 
   const employeeU = useSelector((state) => state.employee.employee);
   const current = employeeU.slice((page - 1) * 5, page * 5);
+  console.log((page - 1) * 5, page * 5);
+  console.log(current, "current", employeeU);
 
   useEffect(() => {
     async function fetchData() {
@@ -43,7 +45,7 @@ const Employee = ({ page }) => {
   }, [page]);
 
   useEffect(() => {
-    if (current && current.length < 5) {
+    if (current && current.length === 0) {
       dispatch(overlayActions.nextsBtnHandler(true));
     } else {
       dispatch(overlayActions.nextsBtnHandler(false));

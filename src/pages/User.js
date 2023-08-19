@@ -3,15 +3,18 @@ import { Link, useParams } from "react-router-dom";
 import { BaseUrl } from "../components/Urls";
 import Spinner from "../components/Spinner";
 import { overlayActions } from "../store/ovarlay";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { formActions } from "../store/form";
 
 const User = () => {
+  const dispatch = useDispatch();
   const params = useParams();
   const { userId } = params;
 
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(null);
-  const [userData, setUserData] = useState(null);
+
+  const userData = useSelector((state) => state.form.data);
 
   useEffect(() => {
     async function fetchData() {
@@ -24,7 +27,9 @@ const User = () => {
           throw new Error("Network response was not ok");
         }
         const responseData = await response.json();
-        setUserData(responseData);
+
+        dispatch(formActions.addHandler(responseData));
+
         setLoading(false);
       } catch (error) {
         console.error("Error:", error);
@@ -35,7 +40,6 @@ const User = () => {
 
     fetchData();
   }, []);
-  console.log("userData", userData);
 
   if (isError) return <div>Something went wrong</div>;
   if (isLoading)
@@ -44,15 +48,17 @@ const User = () => {
         <Spinner />
       </div>
     );
-  const dispatch = useDispatch();
   const userEditHandler = () => {
     dispatch(overlayActions.backdropVisible());
     dispatch(overlayActions.signUpFormVisibleHandler());
+    dispatch(formActions.statusHandler("Update"));
   };
 
   return (
     <div className="container ">
-      <Link to="/">⬅ Back</Link>
+      <div className="mb-2">
+        <Link to="/">⬅ Back</Link>
+      </div>
 
       <div className="radius-5 shadow-base p-2 ">
         <div className="flex justify-end mb-2">
