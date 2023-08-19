@@ -1,4 +1,4 @@
-const test = {
+export const test = {
   selectedCategories: [
     {
       id: 1,

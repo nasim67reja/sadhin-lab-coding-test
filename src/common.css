@@ -78,6 +78,9 @@
 .border-right {
   border-right: 1px solid gray !important;
 }
+.list-none {
+  list-style: none;
+}
 .mb-2 {
   margin-bottom: 2rem;
 }

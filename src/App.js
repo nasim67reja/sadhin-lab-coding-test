@@ -5,12 +5,17 @@ import Backdrop from "./components/Backdrop";
 import { Route, Routes } from "react-router-dom";
 import User from "./pages/User";
 import Home from "./pages/Home";
+import Test from "./pages/Category";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/another" element={<Test />} />
+
         <Route path=":userId" element={<User />} />
       </Routes>
 
