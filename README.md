@@ -2,18 +2,20 @@
 
 ![App Diagram](./public/App-Diagram.png)
 
-This project uses React to develop a unique tab component with user management features. The piece has two tab elements: one displays the employee user list, while the other shows the administrator user list. It also has a form for presenting particular data, a user addition modal, and a user details page.
+This project implements a custom tab component with advanced user management functionalities using React. The component comprises two tabs: one dedicated to displaying the admin user list and the other to present the employee user list. The project also boasts a streamlined user addition form and a user details update feature facilitated through a modal.
 
 ## Features
 
-- Custom tab component containing lists of administrators and employees.
-- First Name, Last Name, and User Type (admin/employee) are the fields in the user adding dialog.
-- without calling the API, automatically adds newly additional users to the appropriate list.
-- Each row has a Details button that leads to the user details page.
-- To edit user info, use the Edit button on the details page.
-  separate route with checkboxes and parent name options for presenting particular info.
-- validating forms properly with the Formik library.
-  CSS and Flexbox responsive layout design.
+- A custom tab component that houses tabs for user lists for employees and administrators.
+- A form for adding new users that asks for their First Name, Last Name, and User Type (administrator/employee).
+- A novel "No Initial Load" feature prevents the corresponding API from triggering when a user accesses a tab for the first time. This guarantees effective loading.
+- Pagination Improvement: Only a small amount of data entries—five per page—are first downloaded from the API. The "Next" button calls the next set of pages. Redux retains the retrieved data so that it may be used to avoid extra API calls when a user navigates back.
+- A "View" button that leads to the user details page on each user's row.
+- Consistent updating of user information via the details modal.
+- Form with a defined path for presenting data; checkboxes and parent name options make selections easier.
+- Dependent upon the Formik library for thorough form validation.
+- CSS and Flexbox created a fluid and responsive layout design.
+- API-independent User Creation/Update: Through Redux Toolkit, newly generated or modified user information is immediately reflected in the UI without needing API calls. In doing so, seamless user interaction and effective data management are ensured.
 
 ## Installation
 
