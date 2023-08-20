@@ -39,7 +39,7 @@ const User = () => {
     }
 
     fetchData();
-  }, []);
+  }, [dispatch, userId]);
 
   if (isError) return <div>Something went wrong</div>;
   if (isLoading)

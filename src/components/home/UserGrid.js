@@ -6,10 +6,10 @@ const UserGrid = ({ users }) => {
     <div className="user-grid">
       <div className="grid-header radius-5">
         <div className="flex-1">User First Name</div>
-        <div className="flex-1">User Last Name</div>
+        <div className="flex-1 last-name">User Last Name</div>
         <div className="flex-1">Role</div>
         <div className="flex-1">Division</div>
-        <div className="flex-1">District</div>
+        <div className="flex-1 district">District</div>
         <div className="flex-1 text-center">View</div>
       </div>
       <ul>

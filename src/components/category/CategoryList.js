@@ -11,6 +11,7 @@ const CategoryList = ({ categories, onCheckboxChange, parentCategories }) => {
             isChecked={category.checked}
             onCheckboxChange={onCheckboxChange}
             parentCategories={parentCategories}
+            level={parentCategories.length}
           />
           {category.subcategories && ( // work like recursion
             <CategoryList

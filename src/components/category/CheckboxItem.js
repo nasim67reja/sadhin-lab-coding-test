@@ -5,6 +5,7 @@ const CheckboxItem = ({
   isChecked,
   onCheckboxChange,
   parentCategories,
+  level,
 }) => {
   const handleChange = (e) => {
     const { checked } = e.target;
@@ -13,14 +14,21 @@ const CheckboxItem = ({
   };
 
   return (
-    <div className="mb-1">
+    <div className="mb-1" style={{ marginLeft: `${level * 20}px` }}>
       <input
         type="checkbox"
         value={item.id}
         checked={isChecked}
         onChange={handleChange}
       />
-      <label className="ml-1">{item.name}</label>
+      <label
+        style={{ fontWeight: `${level === 0 ? "bold" : ""}` }}
+        className={`ml-1 ${
+          level === 0 ? "level-0" : level === 1 ? "level-1" : "level-2"
+        }`}
+      >
+        {item.name}
+      </label>
     </div>
   );
 };

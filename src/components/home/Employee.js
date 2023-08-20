@@ -42,7 +42,7 @@ const Employee = ({ page }) => {
       }
     }
     if (current.length < 1) fetchData();
-  }, [page]);
+  }, [page, current.length, dispatch]);
 
   useEffect(() => {
     if (current && current.length === 0) {

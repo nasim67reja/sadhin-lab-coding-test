@@ -57,3 +57,19 @@
   border-bottom: 1px solid blue;
   color: blue;
 }
+
+@media (max-width: 810px) {
+  .h-524 {
+    height: 600px;
+  }
+}
+@media (max-width: 700px) {
+  .district {
+    display: none;
+  }
+}
+@media (max-width: 580px) {
+  .last-name {
+    display: none;
+  }
+}

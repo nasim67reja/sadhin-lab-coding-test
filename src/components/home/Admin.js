@@ -38,7 +38,7 @@ const Admin = ({ page }) => {
       }
     }
     if (current.length < 1) fetchData();
-  }, []);
+  }, [current.length, dispatch, page]);
 
   if (isError) return <div className="center">Something went wrong</div>;
   if (isLoading) return <Spinner />;
