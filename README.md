@@ -1,10 +1,8 @@
 # Custom Tab Component with User Management
 
-# QUICK SORT
-
 ![App Diagram](./public/App-Diagram.png)
 
-QuickSort is a sorting algorithm based on the [Divide and Conquer algorithm](https://www.geeksforgeeks.org/introduction-to-divide-and-conquer-algorithm-data-structure-and-algorithm-tutorials/) that picks an element as a pivot and partitions the given array around the picked pivot by placing the pivot in its correct position in the sorted array.
+This project uses React to develop a unique tab component with user management features. The piece has two tab elements: one displays the employee user list, while the other shows the administrator user list. It also has a form for presenting particular data, a user addition modal, and a user details page.
 
 ## Features
 
