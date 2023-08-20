@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Custom Tab Component with User Management
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# QUICK SORT
 
-## Available Scripts
+![App Diagram](./public/App-Diagram.png)
 
-In the project directory, you can run:
+QuickSort is a sorting algorithm based on the [Divide and Conquer algorithm](https://www.geeksforgeeks.org/introduction-to-divide-and-conquer-algorithm-data-structure-and-algorithm-tutorials/) that picks an element as a pivot and partitions the given array around the picked pivot by placing the pivot in its correct position in the sorted array.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Custom tab component containing lists of administrators and employees.
+- First Name, Last Name, and User Type (admin/employee) are the fields in the user adding dialog.
+- without calling the API, automatically adds newly additional users to the appropriate list.
+- Each row has a Details button that leads to the user details page.
+- To edit user info, use the Edit button on the details page.
+  separate route with checkboxes and parent name options for presenting particular info.
+- validating forms properly with the Formik library.
+  CSS and Flexbox responsive layout design.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```md
+git clone https://github.com/nasim67reja/users-crud.git
+cd your-repo
+```
 
-### `npm run build`
+2. Install dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Start the development server:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+npm start
+```
 
-### `npm run eject`
+4. Open your browser and navigate to `http://localhost:3000` to see the app in action.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Go to the tab component of the app after opening it in your browser.
+- Click the "Add User" button to see the user addition modal.
+  Enter the necessary user information and choose the user type.
+- To add the user, click "Submit". The user's name will be added to the appropriate list.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- To access the user details page, click the "view" button on a row in the user list.
+- Click the "Edit" button on the user details page to edit user information using the exact modal.
+- Select the data you want to see by navigating the separate route and using the checkboxes.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Technologies Used
 
-## Learn More
+- React
+- Formik (for form validation)
+- CSS with Flexbox (for layout design)
+- Redux Toolkit (for managing state)
+- React Router Dom (for routing)
+- Axios (for api calling)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Credits
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project was completed as a coding test for Sadhin Lab. The initial task description and requirements were provided by them.
