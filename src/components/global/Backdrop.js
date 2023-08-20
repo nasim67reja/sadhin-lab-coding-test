@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { overlayActions } from "../store/ovarlay";
+import { overlayActions } from "../../store/ovarlay";
 
 const Backdrop = () => {
   const dispatch = useDispatch();

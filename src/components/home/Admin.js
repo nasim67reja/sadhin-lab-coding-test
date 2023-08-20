@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import UserGrid from "./UserGrid";
-import Spinner from "./Spinner";
-import { LIMITS } from "./Urls";
-import { employeeActions } from "../store/employee";
+import Spinner from "../global/Spinner";
+import { LIMITS } from "../global/Urls";
+import { employeeActions } from "../../store/employee";
 import { useDispatch, useSelector } from "react-redux";
 
 const Admin = ({ page }) => {

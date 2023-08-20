@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import UserGrid from "./UserGrid";
-import Spinner from "./Spinner";
-import { LIMITS } from "./Urls";
+import Spinner from "../global/Spinner";
+import { LIMITS } from "../global/Urls";
 import { useDispatch, useSelector } from "react-redux";
-import { overlayActions } from "../store/ovarlay";
-import { employeeActions } from "../store/employee";
+import { overlayActions } from "../../store/ovarlay";
+import { employeeActions } from "../../store/employee";
 
 const Employee = ({ page }) => {
   const dispatch = useDispatch();

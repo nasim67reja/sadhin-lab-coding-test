@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { BaseUrl } from "../components/Urls";
-import Spinner from "../components/Spinner";
+import { BaseUrl } from "../components/global/Urls";
+import Spinner from "../components/global/Spinner";
 import { overlayActions } from "../store/ovarlay";
 import { useDispatch, useSelector } from "react-redux";
 import { formActions } from "../store/form";

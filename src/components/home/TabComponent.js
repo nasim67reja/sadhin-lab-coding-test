@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Admin from "./Admin";
 import Employee from "./Employee";
 import { useDispatch, useSelector } from "react-redux";
-import { overlayActions } from "../store/ovarlay";
-import { formActions } from "../store/form";
+import { overlayActions } from "../../store/ovarlay";
+import { formActions } from "../../store/form";
 
 const TabComponent = () => {
   const dispatch = useDispatch();

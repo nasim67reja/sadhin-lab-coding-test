@@ -3,10 +3,10 @@ import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
-import { overlayActions } from "../store/ovarlay";
+import { overlayActions } from "../../store/ovarlay";
 import { BaseUrl, PostUrl } from "./Urls";
-import { employeeActions } from "../store/employee";
-import { formActions } from "../store/form";
+import { employeeActions } from "../../store/employee";
+import { formActions } from "../../store/form";
 
 const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);

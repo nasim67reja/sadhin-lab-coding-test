@@ -1,0 +1,59 @@
+/* tab */
+.tab-buttons {
+  border-bottom: 1px solid gray;
+}
+.tab-content {
+  padding: 25px;
+}
+
+.add-user-button {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.add-user-button:focus {
+  background-color: #79b9e4;
+  outline: none;
+}
+/* user grid */
+.user-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 2rem;
+}
+
+.grid-header,
+.grid-row {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.grid-header {
+  font-weight: bold;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.grid-row:last-child {
+  border-bottom: none;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  padding: 20px;
+  font-size: 16px;
+  width: 100%;
+}
+.btn-active {
+  border-bottom: 1px solid blue;
+  color: blue;
+}
