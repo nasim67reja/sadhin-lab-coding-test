@@ -1,47 +1,24 @@
-import React, { useState } from "react";
-import { test } from "../components/global/test";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CategoryList from "../components/category/CategoryList";
+import { toggleCheckbox } from "../store/category";
 import "../components/category/category.css";
 
 const Category = () => {
-  const [selectedCategories, setSelectedCategories] = useState({});
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.categories);
 
-  const handleCheckboxChange = (id, name, checked, parentCategories) => {
-    setSelectedCategories((prevSelected) => {
-      if (checked) {
-        return {
-          ...prevSelected,
-          [id]: { name, parentCategories },
-        };
-      } else {
-        const { [id]: removed, ...rest } = prevSelected;
-        return rest;
-      }
-    });
+  const handleCheckboxChange = (id, parentId) => {
+    dispatch(toggleCheckbox({ id, parentId }));
   };
 
   return (
     <div className="flex justify-center items-center gap-4 container">
-      <div className="flex-1">
+      <div>
         <CategoryList
-          categories={test.selectedCategories}
+          categories={categories}
           onCheckboxChange={handleCheckboxChange}
-          parentCategories={[]}
         />
-      </div>
-      <div className="flex-1">
-        <p className="font-semibold mb-2">Selected Categories:</p>
-        <ul className="list-none">
-          {Object.entries(selectedCategories).map(
-            ([id, { name, parentCategories }]) => (
-              <li key={id}>
-                {parentCategories.map((parent) => parent.name).join(" > ")}
-                {parentCategories.length > 0 && " > "}
-                {name}
-              </li>
-            )
-          )}
-        </ul>
       </div>
     </div>
   );

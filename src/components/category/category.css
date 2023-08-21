@@ -1,14 +1,17 @@
 .level-0 {
   font-weight: 600;
   font-size: 28px;
-  margin-top: 15px;
   display: inline-block;
+  margin: 8px 0;
+  margin-left: 8px;
 }
 
 .level-1 {
   font-weight: 500;
   font-size: 16px;
   color: #343;
+  margin: 5px 0 5px 8px;
+  display: inline-block;
 }
 .level-2 {
   font-size: 14px;

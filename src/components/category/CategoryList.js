@@ -1,28 +1,20 @@
 import React from "react";
 import CheckboxItem from "./CheckboxItem";
 
-const CategoryList = ({ categories, onCheckboxChange, parentCategories }) => {
+const CategoryList = ({ categories, onCheckboxChange }) => {
   return (
     <ul className="list-none">
-      {categories.map((category, i) => (
-        <li key={i}>
+      {categories.map((category) => (
+        <li key={category.id}>
           <CheckboxItem
             item={category}
-            isChecked={category.checked}
             onCheckboxChange={onCheckboxChange}
-            parentCategories={parentCategories}
-            level={parentCategories.length}
+            level={0}
           />
-          {category.subcategories && ( // work like recursion
-            <CategoryList
-              categories={category.subcategories}
-              onCheckboxChange={onCheckboxChange}
-              parentCategories={[...parentCategories, category]}
-            />
-          )}
         </li>
       ))}
     </ul>
   );
 };
+
 export default CategoryList;
